@@ -13,6 +13,7 @@ export const theme = {
     main: 16,
     half: 8,
     quoter: 4,
+    threehalfs: 26,
     double: 32,
   },
 }

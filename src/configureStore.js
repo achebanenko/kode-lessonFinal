@@ -8,7 +8,7 @@ import { createRootReducer } from './rootReducer'
 import { rootSaga } from './rootSaga'
 
 const persistConfig = {
-  key: 'final-%username%',
+  key: 'final-artchebanenko',
   storage: LocalForage,
   blacklist: ['router', 'api'],
 }
