@@ -81,3 +81,5 @@ GET /account/profile
 Пятница, 26 апреля, 12:00 KGD
 
 # Процесс выполнения
+
+? Ок использовать style <HBox style={{flex: '1'}} />  
