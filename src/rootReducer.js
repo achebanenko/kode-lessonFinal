@@ -4,6 +4,7 @@ import { reducer as formReducer } from 'redux-form'
 
 import { apiReducer } from '@shared/api/reducer'
 import { apiDataReducer } from '@shared/apiData/reducer'
+import { snackReducer } from '@shared/snack/reducer'
 
 export const createRootReducer = history =>
   combineReducers({
@@ -11,4 +12,5 @@ export const createRootReducer = history =>
     apiData: apiDataReducer,
     form: formReducer,
     router: connectRouter(history),
+    snack: snackReducer,
   })

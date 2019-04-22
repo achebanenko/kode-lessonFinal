@@ -10,7 +10,7 @@ const SignInReduxForm = reduxForm({
 
 const mapDispatchToProps = dispatch => ({
   goBack: () => dispatch(routerActions.backTrigger()),
-  signInNotValid: (o) => dispatch(signInSubmitTrigger(o)),
+  signInNotValid: (details) => dispatch(signInSubmitTrigger(details)),
   signIn: (values) => dispatch(signInSubmitTrigger(values)),
 })
 

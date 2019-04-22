@@ -8,6 +8,7 @@ import { ConnectedRouter } from 'connected-react-router'
 import { configureStore } from './configureStore'
 import { ThemeProvider, theme, GlobalStyles } from '@ui/theme'
 import { RootRoutes } from './rootRoutes'
+import { SnackContainer } from '@shared/snack'
 
 const history = createBrowserHistory()
 const { store, persistor } = configureStore(history)
@@ -23,6 +24,7 @@ class App extends Component {
                 <Normalize />
                 <GlobalStyles />
                 <RootRoutes />
+                <SnackContainer />
               </>
             </ThemeProvider>
           </ConnectedRouter>

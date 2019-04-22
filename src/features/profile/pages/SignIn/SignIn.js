@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Field } from 'redux-form'
 import { Link } from 'react-router-dom'
 import { paths } from '@shared/router'
+import { formatPhone, normalizePhone, validEmail, validPhone } from '../../shared'
 
 import { HBox, PageWrapper } from '@ui/atoms'
 import { FontSmall } from '@ui/atoms/Typography'
@@ -21,40 +22,9 @@ export const SignIn = ({
   untouch, valid, submitting, handleSubmit,
   signInNotValid, signIn,
 }) => {
-
   React.useEffect(() => {
     untouch('signin', 'phoneoremail')
   }, [])
-
-  const format = input => {
-    if (!input) return ''
-
-    if (/^[0-9]+$/.test(input)) {
-      if (input.length >= 10) return `+${input.slice(0,1)} (${input.slice(1,4)}) ${input.slice(4,7)}-${input.slice(7,9)}-${input.slice(9)}`
-      if (input.length > 8 && input.length < 10) return `+${input.slice(0,1)} (${input.slice(1,4)}) ${input.slice(4,7)}-${input.slice(7)}`
-      if (input.length === 8) return `+${input.slice(0,1)} (${input.slice(1,4)}) ${input.slice(4,7)}-${input.slice(7)}`
-      if (input.length > 5 && input.length < 8) return `+${input.slice(0,1)} (${input.slice(1,4)}) ${input.slice(4)}`
-      if (input.length === 5) return `+${input.slice(0,1)} (${input.slice(1,4)}) ${input.slice(4)}`
-      if (input.length > 1 && input.length < 5) return `+${input.slice(0,1)} ${input.slice(1)}`
-      return `+${input.slice(0,1)}`
-    }
-
-    return input
-  }
-  const normalize = value => {
-    return value.replace(/\+|\s+|\(|\)|-/g, '')
-  }
-
-  const validEmail = value => (
-    (value && !/^[0-9]+$/.test(value) && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value))
-      ? 'Поле заполнено неверно'
-      : undefined
-  )
-  const validPhone = value => (
-    (value && /^[0-9]+$/.test(value) && value.length !== 11)
-      ? 'Поле заполнено неверно'
-      : undefined
-  )
 
   return (
     <PageWrapper>
@@ -65,8 +35,8 @@ export const SignIn = ({
         label="Номер телефона или Email"
         component={PhoneOrEmail}
         validate={[validPhone, validEmail]}
-        format={format}
-        normalize={normalize}
+        format={formatPhone}
+        normalize={normalizePhone}
       />
       <HBox />
 
@@ -76,8 +46,9 @@ export const SignIn = ({
           valid 
             ? handleSubmit(signIn) 
             : () => signInNotValid({ 
+              openSnack: true,
               type: 'error',
-              errorMessage: 'Поле &laquo;Номер телефона или Email заполнено неверно&raquo;'
+              msgUser: 'Поле Номер телефона или Email заполнено неверно'
             })
         }
       >
