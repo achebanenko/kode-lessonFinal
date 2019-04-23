@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Field } from 'redux-form'
 import { Link } from 'react-router-dom'
-import { formatPhone, normalizePhone, validPhone } from '../../shared'
+import { formatPhone, normalizePhone, validPhone } from '../../helpers'
 
 import { HBox, PageWrapper } from '@ui/atoms'
 import { ButtonMain, Header, InputField } from '@ui/molecules'

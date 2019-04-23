@@ -10,7 +10,7 @@ import { rootSaga } from './rootSaga'
 const persistConfig = {
   key: 'final-artchebanenko',
   storage: LocalForage,
-  blacklist: ['router', 'api'],
+  blacklist: ['router', 'api', 'snack'],
 }
 
 export const configureStore = history => {

@@ -4,7 +4,7 @@ import * as actions from './actions'
 const initialState = {
   active: false,
   type: null,
-  msgUser: null,
+  message: null,
 }
 
 export const snackReducer = handleActions(

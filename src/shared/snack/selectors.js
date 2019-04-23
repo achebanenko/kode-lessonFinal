@@ -1,5 +1,1 @@
-const getSnack = state => state.snack
-
-export const snackSelectors = {
-  getSnack: getSnack,
-}
+export const getSnack = state => state.snack

@@ -1,16 +1,15 @@
 import { createAction } from 'redux-actions'
 
-export const open = createAction(
-  'snack/OPEN',
-  ({ type, msgUser }) => ({
-    type,
-    msgUser,
-  }),
+export const trigger = createAction(
+  'snack/TRIGGER',
+  ({ type, message }) => ({ type, message }),
 )
 
-export const close = createAction('snack/CLOSE')
+export const open = createAction(
+  'snack/OPEN',
+  ({ type, message }) => ({ type, message }),
+)
 
-export const snackActions = {
-  open,
-  close,
-}
+export const close = createAction(
+  'snack/CLOSE'
+)

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Field } from 'redux-form'
 import { Link } from 'react-router-dom'
 import { paths } from '@shared/router'
-import { formatPhone, normalizePhone, validEmail, validPhone } from '../../shared'
+import { formatPhone, normalizePhone, validEmail, validPhone } from '../../helpers'
 
 import { HBox, PageWrapper } from '@ui/atoms'
 import { FontSmall } from '@ui/atoms/Typography'
@@ -19,12 +19,31 @@ const PhoneOrEmail = ({ input, meta, ...rest }) => (
 
 export const SignIn = ({ 
   goBack, 
-  untouch, valid, submitting, handleSubmit,
-  signInNotValid, signIn,
+  untouch,
+  formValues, formErrors, formValid,
+  signIn,
 }) => {
   React.useEffect(() => {
     untouch('signin', 'phoneoremail')
   }, [])
+
+  let data = {
+    values: formValues,
+    errors: formErrors,
+    valid: formValid,
+  }
+
+  if ('phoneoremail' in formErrors) {
+    data = Object.assign({}, data, {
+      shouldOpenSnack: true,
+      snack: {
+        type: 'error',
+        message: 'Поле Номер телефона или Email заполнено неверно'
+      }
+    })
+  }
+
+  const onPress = () => signIn(data)
 
   return (
     <PageWrapper>
@@ -41,16 +60,7 @@ export const SignIn = ({
       <HBox />
 
       <ButtonMain 
-        disabled={submitting}
-        onPress={
-          valid 
-            ? handleSubmit(signIn) 
-            : () => signInNotValid({ 
-              openSnack: true,
-              type: 'error',
-              msgUser: 'Поле Номер телефона или Email заполнено неверно'
-            })
-        }
+        onPress={onPress}
       >
         Войти
       </ButtonMain>
@@ -69,11 +79,10 @@ export const SignIn = ({
 SignIn.propTypes = {
   goBack: PropTypes.func.isRequired,
   untouch: PropTypes.func.isRequired,
-  valid: PropTypes.bool.isRequired,
-  submitting: PropTypes.bool.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
-  signInNotValid: PropTypes.func.isRequired,
   signIn: PropTypes.func.isRequired,
+  formValues: PropTypes.object.isRequired,
+  formErrors: PropTypes.object.isRequired,
+  formValid: PropTypes.bool.isRequired,
 }
 
 PhoneOrEmail.propTypes = {

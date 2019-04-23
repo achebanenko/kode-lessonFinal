@@ -1,25 +1,15 @@
-import { takeEvery, put, delay, select, all } from 'redux-saga/effects'
+import { takeEvery, put } from 'redux-saga/effects'
 import { signInSubmitTrigger } from './actions'
-import { snackActions } from '@shared/snack/actions'
-import { snackSelectors } from '@shared/snack/selectors'
+import { snackActions } from '@shared/snack'
 
 function* worker(action) {
-  console.log('submit')
+  console.log('signin', action.payload)
 
   //snack
-  if (action.payload.openSnack) {
-    const { type, msgUser } = action.payload
-
-    yield all({
-      open: yield put(snackActions.open({ type, msgUser })),
-      latency: yield delay(3000) 
-    })
-    
-    const { active } = yield select(snackSelectors.getSnack)
-    if (active) yield put(snackActions.close())
+  if (action.payload.shouldOpenSnack) {
+    yield put(snackActions.trigger(action.payload.snack))
   }
 
-  //console.log(action.payload)
 }
 
 export function* signInSubmitWatcher() {

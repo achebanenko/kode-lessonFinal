@@ -16,13 +16,15 @@ const StyledSnack = styled.div`
   background-color: ${({ type, theme }) => type === 'error' ? theme.pallete.mainRed : theme.pallete.mainBlue};
 `
 
-export const Snack = ({ active, type, msgUser, close }) => {
-
+export const Snack = ({ 
+  snack: { active, type, message },
+  close,
+}) => {
   return (
     active
       ? ReactDOM.createPortal(
           <StyledSnack type={type} onClick={close}>
-            {msgUser}
+            {message}
           </StyledSnack>, 
           document.getElementById('snack')
         )
@@ -31,8 +33,10 @@ export const Snack = ({ active, type, msgUser, close }) => {
 }
 
 Snack.propTypes = {
-  active: PropTypes.bool.isRequired,
-  type: PropTypes.string,
-  msgUser: PropTypes.string,
-  close: PropTypes.func,
+  snack: PropTypes.shape({
+    active: PropTypes.bool.isRequired,
+    type: PropTypes.string,
+    message: PropTypes.string,
+  }),
+  close: PropTypes.func.isRequired,
 }

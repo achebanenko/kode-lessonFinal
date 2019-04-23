@@ -1,14 +1,14 @@
 import { connect } from 'react-redux'
-import { snackSelectors } from '@shared/snack/selectors'
-import { snackActions} from '@shared/snack/actions'
-import { Snack } from '@ui/molecules'
+import { getSnack } from '../selectors'
+import { close } from '../actions'
+import { Snack } from '../elements'
 
 const mapStateToProps = state => ({
-  ...snackSelectors.getSnack(state)
+  snack: getSnack(state)
 })
 
 const mapDispatchToProps = dispatch => ({
-  close: () => dispatch(snackActions.close()),
+  close: () => dispatch(close()),
 })
 
 export const SnackContainer = connect(
