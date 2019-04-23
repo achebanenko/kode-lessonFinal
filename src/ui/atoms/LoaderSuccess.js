@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const LoaderLoading = () => (
+export const LoaderSuccess = () => (
   <svg width={56} height={56} fill="none">
     <circle cx={28} cy={28} r={28} fill="#003594" />
     <path

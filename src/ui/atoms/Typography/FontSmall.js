@@ -3,7 +3,7 @@ import { styled } from '@ui/theme'
 
 export const FontSmall = styled.div`
   font-size: 14px;
-  color: ${({ muted, theme }) => muted ? theme.pallete.mainGray : theme.pallete.mainBlack};
+  color: ${({ muted, theme }) => muted ? theme.pallete.mainGray : 'inherit'};
   line-height: 24px;
 `
 

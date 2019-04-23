@@ -54,16 +54,14 @@ export const InputField = ({
 }) => {
   const [focused, setFocused] = React.useState(value ? true : false)
   const handleFocus = e => {
-    if (onFocus) onFocus(e) //e.preventDefault()
+    if (onFocus) onFocus(e)
     setFocused(true)
   }
   const handleBlur = e => {
-    if (onBlur) onBlur(e) //e.preventDefault()
+    if (onBlur) onBlur(e)
     setFocused(value ? true : false)
   }
-  React.useEffect(() => {
-    //if (value.length > 0) setFocused(true)
-  })
+  
   return (
     <Field>
       <Label focused={focused} error={error}>

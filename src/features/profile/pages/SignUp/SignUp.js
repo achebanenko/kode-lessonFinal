@@ -7,10 +7,11 @@ import { formatPhone, normalizePhone, validPhone } from '../../helpers'
 import { HBox, PageWrapper } from '@ui/atoms'
 import { ButtonMain, Header, InputField } from '@ui/molecules'
 
-const Phone = ({ input, meta, ...rest }) => (
+const renderField = ({ input, meta }) => (
   <InputField 
-    {...rest}
     {...input}
+    label="Номер телефона"
+    tip="Укажите ваш номер телефона. Он будет использоваться для входа в приложение"
     error={meta.touched && meta.error ? meta.error : null}
   />
 )
@@ -30,9 +31,7 @@ export const SignUp = ({
       
       <Field
         name="phone"
-        label="Номер телефона"
-        tip="Укажите ваш номер телефона. Он будет использоваться для входа в приложение"
-        component={Phone}
+        component={renderField}
         validate={validPhone}
         format={formatPhone}
         normalize={normalizePhone}
@@ -67,9 +66,7 @@ SignUp.propTypes = {
   signUp: PropTypes.func.isRequired,
 }
 
-Phone.propTypes = {
+renderField.propTypes = {
   input: PropTypes.object.isRequired,
   meta: PropTypes.object.isRequired,
-  label: PropTypes.string.isRequired,
-  tip: PropTypes.string,
 }

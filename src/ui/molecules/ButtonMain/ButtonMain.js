@@ -5,6 +5,7 @@ import { styled } from '@ui/theme'
 const Button = styled.button`
   display: block;
   padding: ${({ theme }) => theme.paddings.main}px;
+  width: 100%;
   font-size: 16px;
   color: ${({ theme }) => theme.pallete.mainWhite};
   line-height: 24px;

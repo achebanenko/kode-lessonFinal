@@ -3,16 +3,17 @@ import PropTypes from 'prop-types'
 import { Field } from 'redux-form'
 import { Link } from 'react-router-dom'
 import { paths } from '@shared/router'
+import { FORMS, FIELDS } from '@shared/names'
 import { formatPhone, normalizePhone, validEmail, validPhone } from '../../helpers'
 
 import { HBox, PageWrapper } from '@ui/atoms'
 import { FontSmall } from '@ui/atoms/Typography'
 import { ButtonMain, Header, InputField } from '@ui/molecules'
 
-const PhoneOrEmail = ({ input, meta, ...rest }) => (
+const renderField = ({ input, meta }) => (
   <InputField 
-    {...rest}
     {...input}
+    label="Номер телефона или Email"
     error={meta.touched && meta.error ? meta.error : null}
   />
 )
@@ -24,7 +25,7 @@ export const SignIn = ({
   signIn,
 }) => {
   React.useEffect(() => {
-    untouch('signin', 'phoneoremail')
+    untouch(FORMS.signin, FIELDS.signin.login)
   }, [])
 
   let data = {
@@ -33,7 +34,7 @@ export const SignIn = ({
     valid: formValid,
   }
 
-  if ('phoneoremail' in formErrors) {
+  if (FIELDS.signin.login in formErrors) {
     data = Object.assign({}, data, {
       shouldOpenSnack: true,
       snack: {
@@ -50,9 +51,8 @@ export const SignIn = ({
       <Header action={goBack} />
 
       <Field
-        name="phoneoremail"
-        label="Номер телефона или Email"
-        component={PhoneOrEmail}
+        name={FIELDS.signin.login}
+        component={renderField}
         validate={[validPhone, validEmail]}
         format={formatPhone}
         normalize={normalizePhone}
@@ -85,8 +85,7 @@ SignIn.propTypes = {
   formValid: PropTypes.bool.isRequired,
 }
 
-PhoneOrEmail.propTypes = {
+renderField.propTypes = {
   input: PropTypes.object.isRequired,
   meta: PropTypes.object.isRequired,
-  label: PropTypes.string.isRequired,
 }

@@ -2,14 +2,14 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { text, boolean } from '@storybook/addon-knobs'
 
-import { ButtonMain } from './ButtonMain'
+import { Checkbox } from './Checkbox'
 
 storiesOf('ui/molecules', module)
-  .add('ButtonMain', () => (
-    <ButtonMain
+  .add('Checkbox', () => (
+    <Checkbox
+      value={boolean('value', false)}
+      error={text('error', null)}
       disabled={boolean('disabled', false)}
       onPress={() => undefined}
-    >
-      {text('children', 'Войти')}
-    </ButtonMain>
+    />
   ))

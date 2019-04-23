@@ -1,7 +1,7 @@
 import { createAction } from 'redux-actions'
 
 export const update = createAction(
-  'apiData/auth->UDPATE',
+  'apiData/auth->UPDATE',
   ({ token, refresh_token, lastUpdate }) => ({
     token,
     refresh_token,
