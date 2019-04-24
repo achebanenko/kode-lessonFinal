@@ -15,6 +15,12 @@ export const GlobalStyles = createGlobalStyle`
     font-weight: normal;
     color: ${props => props.theme.pallete.mainBlack};
     line-height: 24px;
+    .muted {
+      color: ${props => props.theme.pallete.mainGray};
+    }
+    .text-center {
+      text-align: center;
+    }
   }
   a {
     color: ${props => props.theme.pallete.mainBlue};

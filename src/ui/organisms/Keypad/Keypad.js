@@ -64,7 +64,7 @@ Keypad.propTypes = {
       render: PropTypes.oneOfType([
         PropTypes.number,
         PropTypes.func,
-      ]),
+      ]).isRequired,
       onPress: PropTypes.func,
     })
   ).isRequired,
