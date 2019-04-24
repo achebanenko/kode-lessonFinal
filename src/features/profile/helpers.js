@@ -1,7 +1,9 @@
+import { FIELDS } from '@shared/names'
+
 export const formatPhone = (input, name) => {
   if (!input) return ''
   
-  input = name === 'phone' ? input.replace(/[^0-9]/g, '') : input
+  input = name === FIELDS.signup.login ? input.replace(/[^0-9]/g, '') : input
 
   if (/^[0-9]+$/.test(input)) {
     if (input.length >= 10) return `+${input.replace(8, 7).slice(0,1)} (${input.slice(1,4)}) ${input.slice(4,7)}-${input.slice(7,9)}-${input.slice(9)}`
@@ -44,9 +46,15 @@ export const validEmail = (value) => {
 }
 
 export const validPhone = (value, allValues, props, name) => {
-  if (/^[0-9]+$/.test(value) || name === 'phone') {
+  if (/^[0-9]+$/.test(value) || name === FIELDS.signup.login) {
     return (!value || value.length !== 11)
       ? 'Поле заполнено неверно'
       : undefined
   }
+}
+
+export const validCheckbox = (value) => {
+  return !value
+    ? 'Обязательное поле'
+    : undefined
 }

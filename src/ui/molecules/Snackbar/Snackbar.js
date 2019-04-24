@@ -29,7 +29,7 @@ export const Snackbar = ({ type, message, onPress }) => (
   </Container>
 )
 
-Snackbar.proptypes = {
+Snackbar.propTypes = {
   type: PropTypes.string,
   message: PropTypes.string,
   onPress: PropTypes.func.isRequired,

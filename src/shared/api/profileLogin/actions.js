@@ -11,3 +11,5 @@ export const failure = createAction(
   'api/profileLogin->FAILURE',
   ({ error }) => ({ error }),
 )
+
+export const reset = createAction('api/profileLogin->RESET')

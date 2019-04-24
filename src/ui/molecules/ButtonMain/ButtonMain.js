@@ -21,7 +21,7 @@ export const ButtonMain = ({
   disabled, 
   onPress 
 }) => (
-  <Button disabled={disabled} onClick={onPress}>
+  <Button disabled={disabled} onClick={disabled ? undefined : onPress}>
     {children}
   </Button>
 )

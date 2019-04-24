@@ -7,7 +7,7 @@ import { Checkbox } from './Checkbox'
 storiesOf('ui/molecules', module)
   .add('Checkbox', () => (
     <Checkbox
-      value={boolean('value', false)}
+      checked={boolean('checked', false)}
       error={text('error', null)}
       disabled={boolean('disabled', false)}
       onPress={() => undefined}

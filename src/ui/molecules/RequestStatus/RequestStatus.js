@@ -34,7 +34,7 @@ export const RequestStatus = ({ status, message }) => (
   </Container>
 )
 
-RequestStatus.proptypes = {
+RequestStatus.propTypes = {
   status: PropTypes.oneOf(['loading','success','failure']),
   message: PropTypes.string,
 }

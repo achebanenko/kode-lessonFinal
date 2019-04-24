@@ -6,7 +6,7 @@ const initialState = {
   error: null,
 }
 
-export const profileLoginReducer = handleActions(
+export const profileRegistrationReducer = handleActions(
   {
     [actions.start]: () => ({ status: 'loading', error: null }),
     [actions.success]: () => ({ status: 'success', error: null }),

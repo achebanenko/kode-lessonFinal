@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import { styled } from '@ui/theme'
 
-const Field = styled.div`
+const Container = styled.div`
   display: flex;
   position: relative;
   padding-top: 15px;
@@ -30,7 +30,7 @@ const TextInput = styled.input.attrs({ type: 'text' })`
   line-height: 24px;
   background: transparent;
   border: none;
-  border-bottom: 1px solid ${({ focused, theme }) => focused ? theme.pallete.mainBlue : theme.pallete.mainGray};
+  border-bottom: 1px solid ${({ focused, disabled, theme }) => focused && !disabled ? theme.pallete.mainBlue : theme.pallete.mainGray};
   outline: none;
 `
 
@@ -48,6 +48,7 @@ export const InputField = ({
   value,
   tip,
   error,
+  disabled,
   onFocus,
   onBlur,
   onChange,
@@ -63,21 +64,22 @@ export const InputField = ({
   }
   
   return (
-    <Field>
+    <Container>
       <Label focused={focused} error={error}>
         {label}
       </Label>
       <TextInput
         value={value}
         focused={focused}
+        disabled={disabled}
         onFocus={handleFocus}
         onBlur={handleBlur}
-        onChange={onChange}
+        onChange={disabled ? undefined : onChange}
       />
       <Misc error={error}>
         {error ? error : tip }
       </Misc>
-    </Field>
+    </Container>
   )
 }
 

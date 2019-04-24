@@ -8,13 +8,14 @@ import { formatPhone, normalizePhone, validEmail, validPhone } from '../../helpe
 
 import { HBox, PageWrapper } from '@ui/atoms'
 import { FontSmall } from '@ui/atoms/Typography'
-import { ButtonMain, Header, InputField } from '@ui/molecules'
+import { ButtonMain, Header, InputField, RequestStatus } from '@ui/molecules'
 
-const renderField = ({ input, meta }) => (
+const renderField = ({ input, meta, disabled }) => (
   <InputField 
     {...input}
     label="Номер телефона или Email"
     error={meta.touched && meta.error ? meta.error : null}
+    disabled={disabled}
   />
 )
 
@@ -22,29 +23,14 @@ export const SignIn = ({
   goBack, 
   untouch,
   formValues, formErrors, formValid,
+  requestStatus,
   signIn,
 }) => {
   React.useEffect(() => {
     untouch(FORMS.signin, FIELDS.signin.login)
   }, [])
 
-  let data = {
-    values: formValues,
-    errors: formErrors,
-    valid: formValid,
-  }
-
-  if (FIELDS.signin.login in formErrors) {
-    data = Object.assign({}, data, {
-      shouldOpenSnack: true,
-      snack: {
-        type: 'error',
-        message: 'Поле Номер телефона или Email заполнено неверно'
-      }
-    })
-  }
-
-  const onPress = () => signIn(data)
+  const onPress = () => signIn({ formValues, formErrors, formValid, })
 
   return (
     <PageWrapper>
@@ -56,22 +42,39 @@ export const SignIn = ({
         validate={[validPhone, validEmail]}
         format={formatPhone}
         normalize={normalizePhone}
+        disabled={requestStatus ? true : false}
       />
-      <HBox />
 
+      <HBox />
       <ButtonMain 
+        disabled={requestStatus ? true : false}
         onPress={onPress}
       >
         Войти
       </ButtonMain>
+
       <HBox size="double" />
 
-      <FontSmall muted>
-        <div>Нет аккаунта?</div>
-        <Link to={paths.profile.signUp}>
-          Зарегистрируйтесь
-        </Link>
-      </FontSmall>
+      {requestStatus
+        ? (
+          <RequestStatus 
+            status={requestStatus || null} 
+            message={(requestStatus === 'loading' && 'Отправляем код подтверждения...')
+              || (requestStatus === 'success' && 'Успешно!')
+              || (requestStatus === 'failure' && 'Ошибка :(')
+              || null
+            }
+          />
+        ) 
+        : (
+          <FontSmall muted>
+            <div>Нет аккаунта?</div>
+            <Link to={paths.profile.signUp}>
+              Зарегистрируйтесь
+            </Link>
+          </FontSmall>
+        )
+      }
     </PageWrapper>
   )
 }
@@ -79,10 +82,11 @@ export const SignIn = ({
 SignIn.propTypes = {
   goBack: PropTypes.func.isRequired,
   untouch: PropTypes.func.isRequired,
-  signIn: PropTypes.func.isRequired,
   formValues: PropTypes.object.isRequired,
   formErrors: PropTypes.object.isRequired,
   formValid: PropTypes.bool.isRequired,
+  requestStatus: PropTypes.string,
+  signIn: PropTypes.func.isRequired,
 }
 
 renderField.propTypes = {
