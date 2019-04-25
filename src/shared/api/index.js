@@ -13,12 +13,15 @@ import * as profileRegistrationSelectors from './profileRegistration/selectors'
 import * as profileConfirmActions from './profileConfirm/actions'
 import * as profileConfirmSelectors from './profileConfirm/selectors'
 
+import * as profileInfoActions from './profileInfo/actions'
+
 export const apiActions = {
   sessionGuest: sessionGuestActions,
   sessionRefresh: sessionRefreshActions,
   profileLogin: profileLoginActions,
   profileRegistration: profileRegistrationActions,
   profileConfirm: profileConfirmActions,
+  profileInfo: profileInfoActions,
 }
 
 export const apiSelectors = {

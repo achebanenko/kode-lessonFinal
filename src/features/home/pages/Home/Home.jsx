@@ -7,9 +7,12 @@ import IntroImage from '@ui/assets/intro.jpg'
 import HelloImage from '@ui/assets/hello.jpg'
 
 export const Home = ({ 
-  goProfileFlow,
+  goProfileFlow, infoProfile,
   profileId, 
 }) => {
+  React.useEffect(() => {
+    if (profileId) infoProfile()
+  }, [])
   return (
     <PageBackground url={profileId ? HelloImage : IntroImage}>
       <PageWrapper>
@@ -28,5 +31,6 @@ export const Home = ({
 
 Home.propTypes = {
   goProfileFlow: PropTypes.func.isRequired,
-
+  infoProfile: PropTypes.func.isRequired,
+  profileId: PropTypes.string, 
 }

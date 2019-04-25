@@ -15,6 +15,7 @@ function* worker(action) {
       body: { login, confirmationGDPRDate, }
     })
     
+    console.log(response)
     yield all({
       status: yield put(actions.success()),
       latency: yield delay(2000) 
