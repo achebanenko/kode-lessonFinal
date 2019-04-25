@@ -19,7 +19,7 @@ const Button = styled.button`
 const Title = styled.div`
   font-size: 20px;
   line-height: 32px;
-  ${({ centered }) => centered 
+  ${({ centered }) => centered
     ? 'flex: 1; text-align: center;'
     : null
   }
@@ -31,7 +31,7 @@ export const Header = ({ title, action, centered }) => (
       <IconBack />
     </Button>
     <VBox/>
-    <Title centered>
+    <Title centered={centered}>
       {title}
     </Title>
   </StyledHeader>

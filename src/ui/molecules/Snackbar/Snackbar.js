@@ -1,8 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { CSSTransition } from 'react-transition-group'
 
 import { styled } from '@ui/theme'
 import { IconUser, VBox } from '@ui/atoms'
+
+const duration = 500
 
 const Container = styled.div`
   display: flex;
@@ -19,15 +22,53 @@ const Container = styled.div`
   > * {
     flex-shrink: 0;
   }
+  
+  &.snack-enter {
+    transform: translateY(-100%);
+  }
+  &.snack-enter-active {
+    transition: transform ${duration}ms;
+    transform: translateY(0);
+  }
+  &.snack-exit {
+    transform: translateY(0);
+  }
+  &.snack-exit-active {
+    transition: transform ${duration}ms;
+    transform: translateY(-100%);
+  }
 `
 
-export const Snackbar = ({ type, message, onPress }) => (
-  <Container type={type} onClick={onPress}>
-    <IconUser />
-    <VBox />
-    {message}
-  </Container>
-)
+export const Snackbar = ({ type, message, onPress }) => {
+
+  const [animate, setAnimate] = React.useState(false)
+  React.useEffect(() => {
+    setTimeout(() => {
+      setAnimate(false)
+    }, 3000 - duration)
+    return (
+      setAnimate(true)
+    )
+  }, [])
+  
+  return (
+    <CSSTransition 
+      in={animate}
+      classNames="snack"
+      timeout={duration}
+      unmountOnExit 
+      mountOnEnter
+    >
+    
+      <Container type={type} onClick={onPress}>
+        <IconUser />
+        <VBox />
+        {message}
+      </Container>
+    
+    </CSSTransition>
+  )
+}
 
 Snackbar.propTypes = {
   type: PropTypes.string,
