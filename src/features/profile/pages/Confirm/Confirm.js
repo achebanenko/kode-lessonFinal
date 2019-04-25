@@ -33,7 +33,7 @@ const Num = styled.div`
 export const Confirm = ({ 
   goBack, 
   attempt, requestStatus, 
-  confirm,
+  confirm, resend,
 }) => {
 
   const [pin, setPin] = React.useState( [] )
@@ -70,7 +70,7 @@ export const Confirm = ({
     render: ({ disabled }) => (<FontSmallest disabled={disabled}>
       Не пришло письмо?
     </FontSmallest>),
-    onPress: () => console.log('dispatch'),
+    onPress: resend,
   })
   
   keys.push({
@@ -144,4 +144,5 @@ Confirm.propTypes = {
   attempt: PropTypes.object.isRequired,
   requestStatus: PropTypes.string,
   confirm: PropTypes.func.isRequired,
+  resend: PropTypes.func.isRequired,
 }

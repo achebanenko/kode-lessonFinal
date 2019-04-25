@@ -1,4 +1,4 @@
-import { put, takeLatest, take, call, all, delay } from 'redux-saga/effects'
+import { put, takeLatest, call, all, delay } from 'redux-saga/effects'
 import { apiRequest } from '../apiRequest'
 import * as actions from './actions'
 import { routerActions, paths } from '@shared/router'
