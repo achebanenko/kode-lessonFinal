@@ -10,11 +10,15 @@ import * as profileLoginSelectors from './profileLogin/selectors'
 import * as profileRegistrationActions from './profileRegistration/actions'
 import * as profileRegistrationSelectors from './profileRegistration/selectors'
 
+import * as profileConfirmActions from './profileConfirm/actions'
+import * as profileConfirmSelectors from './profileConfirm/selectors'
+
 export const apiActions = {
   sessionGuest: sessionGuestActions,
   sessionRefresh: sessionRefreshActions,
   profileLogin: profileLoginActions,
   profileRegistration: profileRegistrationActions,
+  profileConfirm: profileConfirmActions,
 }
 
 export const apiSelectors = {
@@ -22,4 +26,5 @@ export const apiSelectors = {
   sessionRefresh: sessionRefreshSelectors,
   profileLogin: profileLoginSelectors,
   profileRegistration: profileRegistrationSelectors,
+  profileConfirm: profileConfirmSelectors,
 }

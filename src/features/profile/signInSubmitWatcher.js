@@ -5,8 +5,6 @@ import { apiActions, apiSelectors } from '@shared/api'
 import { FORMS, FIELDS } from '@shared/names'
 
 function* worker(action) {
-  console.log(FORMS.signin, action.payload)
-
   const { formValues, formErrors, formValid, } = action.payload
 
   // snack

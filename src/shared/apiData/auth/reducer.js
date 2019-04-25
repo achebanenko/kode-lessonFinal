@@ -6,6 +6,10 @@ const initialState = {
   refresh_token: null,
   udid: null,
   lastUpdate: null,
+
+  login: null,
+  channel: null,
+  attemptId: null,
 }
 
 export const authReducer = handleActions(
@@ -23,6 +27,8 @@ export const authReducer = handleActions(
       ...state,
       udid: action.payload.udid,
     }),
+
+    [actions.attempt]: (state, action) => ({ ...state, ...action.payload }),
   },
   initialState,
 )

@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { formatPhone } from '../../helpers'
 
 import { styled } from '@ui/theme'
 import { IconBackspace, HBox, PageWrapper } from '@ui/atoms'
@@ -31,7 +32,8 @@ const Num = styled.div`
 
 export const Confirm = ({ 
   goBack, 
-  requestStatus, 
+  attempt, requestStatus, 
+  confirm,
 }) => {
 
   const [pin, setPin] = React.useState( [] )
@@ -43,9 +45,15 @@ export const Confirm = ({
   });
   const prevPin = prevPinRef.current;
 
-  React.useEffect(() => (
-    console.log( pin.length, pin.join('') )
-  ))
+  React.useEffect(() => {
+    if (pin.length === 4) {
+      confirm({ 
+        attemptId: attempt.attemptId,
+        code: pin.join(''),
+      })
+      setPin([])
+    }
+  })
   
   const keys = []
   for (let i = 1; i <= 9; i++) {
@@ -80,28 +88,43 @@ export const Confirm = ({
       <Header title="Подтверждение" action={goBack} centered />
 
       <div className="muted text-center">
-        Введите код из SMS, отправленный на номер
+        {
+          attempt.channel === 'phone' 
+            ? `Введите код из SMS, отправленный на номер ${formatPhone(attempt.login)}`
+            : null
+        }
+
+        {
+          attempt.channel === 'email' 
+            ? `Введите код из письма, отправленный на почту ${attempt.login}`
+            : null
+        }
       </div>
       <HBox size="double" />
-
-      <Container>
-        <Screen>
-          {
-            dummy.concat(pin)
-              .sort((a,b) => {
-                if (a === null) return 1
-                else if (b === null) return -1
-                else return 0
-              })
-              .slice(0,4) 
-              .map((v,i) => (
-                <Num key={i} className={v ? 'active' : ''}>
-                  {v}
-                </Num>
-              ))
-          }
-        </Screen>
-      </Container>
+      
+      {requestStatus
+        ? <RequestStatus status={requestStatus} />
+        : (
+          <Container>
+            <Screen>
+              {
+                dummy.concat(pin)
+                  .sort((a,b) => {
+                    if (a === null) return 1
+                    else if (b === null) return -1
+                    else return 0
+                  })
+                  .slice(0,4) 
+                  .map((v,i) => (
+                    <Num key={i} className={v ? 'active' : ''}>
+                      {v}
+                    </Num>
+                  ))
+              }
+            </Screen>
+          </Container>
+        )
+      }
       
       <HBox size="max" />
 
@@ -115,4 +138,7 @@ export const Confirm = ({
 
 Confirm.propTypes = {
   goBack: PropTypes.func.isRequired,
+  attempt: PropTypes.object.isRequired,
+  requestStatus: PropTypes.string,
+  confirm: PropTypes.func.isRequired,
 }
