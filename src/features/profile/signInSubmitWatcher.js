@@ -2,7 +2,7 @@ import { takeEvery, put, select, take } from 'redux-saga/effects'
 import { signInSubmitTrigger } from './actions'
 import { snackActions } from '@shared/snack'
 import { apiActions, apiSelectors } from '@shared/api'
-import { FORMS, FIELDS } from '@shared/names'
+import { FIELDS } from '@shared/names'
 
 function* worker(action) {
   const { formValues, formErrors, formValid, } = action.payload
@@ -16,12 +16,14 @@ function* worker(action) {
   }
 
   if (formValid) {
-    yield put(apiActions.profileLogin.trigger({ login: formValues[FIELDS.signin.login] }))
+    yield put(apiActions.profileLogin.trigger({ 
+      login: formValues[FIELDS.signin.login] 
+    }))
     
     // bad response
     yield take(apiActions.profileLogin.failure.toString())
-    
     const { key, msgUser } = yield select(apiSelectors.profileLogin.getError)
+
     yield put(snackActions.trigger({ 
       type: 'error', 
       message: key === 'KrrInvalidUserCredentials' ? 'Такого аккаунта не существует' : msgUser,

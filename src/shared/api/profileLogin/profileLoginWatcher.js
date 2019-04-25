@@ -10,16 +10,17 @@ function* worker(action) {
   yield put(actions.start())
   try {
     const response = yield call(apiRequest, '/account/profile/login', 'POST', {
-      body: { login, },
+      body: { login, }
     })
-
-    yield put(actions.success())
-    yield put(apiDataActions.auth.attempt({ ...response, login, }))
 
     yield all({
-      forward: yield put(routerActions.pushTrigger({ path: paths.profile.confirm })),
-      latency: yield delay(1500) 
+      status: yield put(actions.success()),
+      latency: yield delay(2000) 
     })
+    // store attempt info and forward
+    yield put(apiDataActions.auth.attempt({ ...response, login, }))
+    yield put(routerActions.pushTrigger({ path: paths.profile.confirm }))
+    yield put(actions.reset())
   } catch (error) {
     yield put(actions.failure({ error }))
   }

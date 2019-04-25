@@ -1,4 +1,4 @@
-import { put, takeLatest, call, delay, all } from 'redux-saga/effects'
+import { put, takeLatest, take, call, delay, all } from 'redux-saga/effects'
 import { apiRequest } from '../apiRequest'
 import * as actions from './actions'
 import { apiDataActions } from '@shared/apiData'
@@ -14,13 +14,14 @@ function* worker(action) {
     })
 
     console.log(response)
-    yield put(actions.success())
-    //yield put(apiDataActions.auth.attempt({ ...response, login, }))
-
     yield all({
-      //forward: yield put(routerActions.pushTrigger({ path: paths.profile.confirm })),
-      //latency: yield delay(1500) 
+      status: yield put(actions.success()),
+      latency: yield delay(2000) 
     })
+    //store response
+    //yield put(apiDataActions.auth.attempt({ ...response, login, })) // profile
+
+    yield put(routerActions.pushTrigger({ path: paths.home }))
   } catch (error) {
     yield put(actions.failure({ error }))
   }
@@ -28,4 +29,11 @@ function* worker(action) {
 
 export function* profileConfirmWatcher() {
   yield takeLatest(actions.trigger.toString(), worker)
+
+  // watch three errors
+  for (let i = 0; i < 3; i++) {
+    yield take(actions.failure.toString())
+  }
+  yield put(apiDataActions.auth.reset())
+  yield put(routerActions.pushTrigger({ path: paths.profile.signIn }))
 }

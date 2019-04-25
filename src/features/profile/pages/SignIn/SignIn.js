@@ -21,13 +21,16 @@ const renderField = ({ input, meta, disabled }) => (
 
 export const SignIn = ({ 
   goBack, 
-  untouch,
+  untouch, change,
   formValues, formErrors, formValid,
-  requestStatus,
+  requestStatus, login,
   signIn,
 }) => {
   React.useEffect(() => {
     untouch(FORMS.signin, FIELDS.signin.login)
+    if (login) {
+      change(FIELDS.signin.login, login)
+    }
   }, [])
 
   const onPress = () => signIn({ formValues, formErrors, formValid, })
@@ -82,10 +85,12 @@ export const SignIn = ({
 SignIn.propTypes = {
   goBack: PropTypes.func.isRequired,
   untouch: PropTypes.func.isRequired,
+  change: PropTypes.func.isRequired,
   formValues: PropTypes.object.isRequired,
   formErrors: PropTypes.object.isRequired,
   formValid: PropTypes.bool.isRequired,
   requestStatus: PropTypes.string,
+  login: PropTypes.string,
   signIn: PropTypes.func.isRequired,
 }
 

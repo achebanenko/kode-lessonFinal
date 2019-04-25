@@ -21,7 +21,7 @@ export const createUdid = createAction(
 
 export const attempt = createAction(
   'apiData/auth->ATTEMPT',
-  ({ login, channel, attemptId }) => ({
+  ({ login, channel = null, attemptId = null }) => ({
     login,
     channel,
     attemptId,

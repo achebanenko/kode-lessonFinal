@@ -53,7 +53,7 @@ export const InputField = ({
   onBlur,
   onChange,
 }) => {
-  const [focused, setFocused] = React.useState(value ? true : false)
+  const [focused, setFocused] = React.useState(false)
   const handleFocus = e => {
     if (onFocus) onFocus(e)
     setFocused(true)
@@ -62,6 +62,10 @@ export const InputField = ({
     if (onBlur) onBlur(e)
     setFocused(value ? true : false)
   }
+
+  React.useEffect(() => {
+    if (value) setFocused(true)
+  })
   
   return (
     <Container>

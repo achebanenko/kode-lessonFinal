@@ -56,6 +56,7 @@ export const Confirm = ({
   })
   
   const keys = []
+
   for (let i = 1; i <= 9; i++) {
     keys.push({
       render: i,
@@ -103,7 +104,9 @@ export const Confirm = ({
       <HBox size="double" />
       
       {requestStatus
-        ? <RequestStatus status={requestStatus} />
+        ? <RequestStatus 
+            status={requestStatus} 
+          />
         : (
           <Container>
             <Screen>
