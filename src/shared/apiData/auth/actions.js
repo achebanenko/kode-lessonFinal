@@ -27,3 +27,7 @@ export const attempt = createAction(
     attemptId,
   }),
 )
+export const success = createAction(
+  'apiData/auth->SUCCESS',
+  ({ id }) => ({ id }),
+)

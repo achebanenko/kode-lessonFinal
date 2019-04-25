@@ -1,7 +1,7 @@
-import { takeEvery, take, put, select, } from 'redux-saga/effects'
+import { takeEvery, put, } from 'redux-saga/effects'
 import { signUpSubmitTrigger } from './actions'
 import { snackActions } from '@shared/snack'
-import { apiActions, apiSelectors } from '@shared/api'
+import { apiActions } from '@shared/api'
 import { FIELDS } from '@shared/names'
 
 function* worker(action) {
@@ -25,18 +25,6 @@ function* worker(action) {
       login: formValues[FIELDS.signup.login],
       confirmationGDPRDate: Date.now()
     }))
-
-    // bad response
-    yield take(apiActions.profileRegistration.failure.toString())
-    const { msgUser } = yield select(apiSelectors.profileRegistration.getError)
-
-    yield put(snackActions.trigger({ 
-      type: 'error', 
-      message: msgUser ? msgUser : 'Не удалось создать аккаунт',
-    }))
-
-    yield take(snackActions.close.toString())
-    yield put(apiActions.profileRegistration.reset())
   }
 }
 

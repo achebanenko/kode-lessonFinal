@@ -10,6 +10,8 @@ const initialState = {
   login: null,
   channel: null,
   attemptId: null,
+
+  id: null,
 }
 
 export const authReducer = handleActions(
@@ -29,6 +31,7 @@ export const authReducer = handleActions(
     }),
 
     [actions.attempt]: (state, action) => ({ ...state, ...action.payload }),
+    [actions.success]: (state, action) => ({ ...state, ...action.payload }),
   },
   initialState,
 )

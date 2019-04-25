@@ -9,3 +9,4 @@ export const getAttempt = state => ({
   login: state.apiData.auth.login,
   channel: state.apiData.auth.channel,
 })
+export const getId = state => state.apiData.auth.id

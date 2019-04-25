@@ -3,6 +3,7 @@ import { apiRequest } from '../apiRequest'
 import * as actions from './actions'
 import { apiDataActions } from '@shared/apiData'
 import { routerActions, paths } from '@shared/router'
+import { snackActions } from '@shared/snack'
 
 function* worker(action) {
   const { code, attemptId } = action.payload
@@ -18,12 +19,20 @@ function* worker(action) {
       status: yield put(actions.success()),
       latency: yield delay(2000) 
     })
-    //store response
-    //yield put(apiDataActions.auth.attempt({ ...response, login, })) // profile
-
+    //store id from response then go home
+    const { id } = response
+    yield put(apiDataActions.auth.success({ id, }))
     yield put(routerActions.pushTrigger({ path: paths.home }))
+
   } catch (error) {
     yield put(actions.failure({ error }))
+    yield put(snackActions.trigger({ 
+      type: 'error', 
+      message: error.msgUser ? error.msgUser : 'Неверный код подтверждения',
+    }))
+
+    yield take(snackActions.close.toString())
+    yield put(actions.reset())
   }
 }
 

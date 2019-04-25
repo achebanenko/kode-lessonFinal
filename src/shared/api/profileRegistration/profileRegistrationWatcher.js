@@ -1,4 +1,4 @@
-import { put, takeLatest, call, all, delay } from 'redux-saga/effects'
+import { put, takeLatest, take, call, all, delay } from 'redux-saga/effects'
 import { apiRequest } from '../apiRequest'
 import * as actions from './actions'
 import { routerActions, paths } from '@shared/router'
@@ -31,6 +31,13 @@ function* worker(action) {
     }))
   } catch (error) {
     yield put(actions.failure({ error }))
+    yield put(snackActions.trigger({ 
+      type: 'error', 
+      message: error.msgUser ? error.msgUser : 'Не удалось создать аккаунт',
+    }))
+
+    yield take(snackActions.close.toString())
+    yield put(actions.reset())
   }
 }
 
