@@ -68,7 +68,12 @@ export const Confirm = ({
   keys.push({
     classNames: 'full-width',
     render: ({ disabled }) => (<FontSmallest disabled={disabled}>
-      Не пришло письмо?
+      {attempt.channel === 'phone' 
+        ? `Не пришло SMS?` 
+        : attempt.channel === 'email' 
+          ? `Не пришло письмо?` 
+          : null
+      }
     </FontSmallest>),
     onPress: resend,
   })

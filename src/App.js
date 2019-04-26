@@ -27,7 +27,7 @@ class App extends Component {
                 <SnackContainer />
               </>
             </ThemeProvider>
-          </ConnectedRouter>
+            </ConnectedRouter>
         </PersistGate>
       </Provider>
     )
