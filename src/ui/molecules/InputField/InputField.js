@@ -22,7 +22,7 @@ const Label = styled.label`
   transform: translateY(${({focused}) => focused && '-25px'});
 `
 
-const TextInput = styled.input.attrs({ type: 'text' })`
+const TextInput = styled.input`
   position: absolute;
   width: 100%;
   height: 40px;
@@ -45,6 +45,7 @@ const Misc = styled.div`
 
 export const InputField = ({ 
   label,
+  type = 'text',
   value,
   tip,
   error,
@@ -73,6 +74,7 @@ export const InputField = ({
         {label}
       </Label>
       <TextInput
+        type={type}
         value={value}
         focused={focused}
         disabled={disabled}
@@ -88,6 +90,7 @@ export const InputField = ({
 }
 
 InputField.propTypes = {
+  label: PropTypes.string,
   label: PropTypes.string,
   value: PropTypes.string.isRequired,
   tip: PropTypes.string,

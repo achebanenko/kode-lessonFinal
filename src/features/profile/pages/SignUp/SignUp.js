@@ -11,8 +11,8 @@ import { ButtonMain, CheckboxField, Header, InputField, RequestStatus } from '@u
 const renderField = ({ input, meta, disabled }) => (
   <InputField 
     {...input}
-    type="tel"
     label="Номер телефона"
+    type="tel"
     tip="Укажите ваш номер телефона. Он будет использоваться для входа в приложение"
     error={meta.touched && meta.error ? meta.error : null}
     disabled={disabled}
