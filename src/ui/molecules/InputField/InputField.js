@@ -91,7 +91,7 @@ export const InputField = ({
 
 InputField.propTypes = {
   label: PropTypes.string,
-  label: PropTypes.string,
+  type: PropTypes.string,
   value: PropTypes.string.isRequired,
   tip: PropTypes.string,
   error: PropTypes.string,
