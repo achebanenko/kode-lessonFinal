@@ -34,7 +34,7 @@ export const GlobalStyles = createGlobalStyle`
     left: 0;
     right: 0;
     bottom: 0;
-    width:100%;
+    overflow-y: auto;
   }
 
   .route-slide-enter {

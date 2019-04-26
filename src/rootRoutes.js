@@ -15,13 +15,13 @@ export const RootRoutes = withRouter(({ location }) => {
   const timeout = { enter: 500, exit: 350 }
 
   return (
-    <TransitionGroup>
+    <TransitionGroup className="layout-fixed">
       <CSSTransition 
         key={key} 
         timeout={timeout} 
         classNames="route-slide"
       >
-        <div className="layout-fixed">
+        <div className="layout-inner">
           <Switch location={location}>
             <Route component={HomeContainer} path={paths.home} exact />
             <Route component={SignInContainer} path={paths.profile.signIn} exact />
