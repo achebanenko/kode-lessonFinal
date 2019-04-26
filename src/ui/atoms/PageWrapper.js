@@ -3,6 +3,6 @@ import { styled } from '@ui/theme'
 export const PageWrapper = styled.div`
   display: flex;
   padding: ${({ theme }) => theme.paddings.main}px;
-  min-height: 100vh;
+  height: 100%;
   flex-direction: column;
 `
