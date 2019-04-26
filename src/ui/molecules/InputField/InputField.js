@@ -22,7 +22,7 @@ const Label = styled.label`
   transform: translateY(${({focused}) => focused && '-25px'});
 `
 
-const TextInput = styled.input.attrs({ type: 'text' })`
+const TextInput = styled.input`
   position: absolute;
   width: 100%;
   height: 40px;
@@ -80,6 +80,8 @@ export const InputField = ({
         onBlur={handleBlur}
         onChange={disabled ? undefined : onChange}
         inputmode="numeric"
+        inputType="phone"
+        type="tel"
       />
       <Misc error={error}>
         {error ? error : tip }
