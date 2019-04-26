@@ -12,7 +12,7 @@ import {
 
 export const RootRoutes = withRouter(({ location }) => {
   const { key } = location
-  const timeout = { enter: 300, exit: 200 }
+  const timeout = { enter: 500, exit: 350 }
 
   return (
     <TransitionGroup>

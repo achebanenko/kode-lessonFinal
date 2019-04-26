@@ -82,4 +82,6 @@ GET /account/profile
 
 # Процесс выполнения
 
-? Ок использовать style <HBox style={{flex: '1'}} />  
+## Результат
+
+

@@ -6,7 +6,7 @@ export const HBox = styled.div`
     !size || size === 'max' ? theme.paddings.main : theme.paddings[size]
   )}px;
   flex: ${({ size }) => (
-    size === 'max' ? '1 1 auto' : '0 1 auto'
+    size === 'max' ? '1 0 auto' : '0 0 auto'
   )};
 `
 

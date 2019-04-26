@@ -43,12 +43,12 @@ export const GlobalStyles = createGlobalStyle`
   
   .route-slide-enter-active {
     transform: translateX(0);
-    transition: transform 300ms;
+    transition: transform 500ms;
   }
   
   .route-slide-exit {
     transform: translateX(0);
-    transition: transform 200ms;
+    transition: transform 350ms;
   }
   
   .route-slide-exit-active {

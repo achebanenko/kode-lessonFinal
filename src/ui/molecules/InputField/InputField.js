@@ -79,6 +79,7 @@ export const InputField = ({
         onFocus={handleFocus}
         onBlur={handleBlur}
         onChange={disabled ? undefined : onChange}
+        inputmode="numeric"
       />
       <Misc error={error}>
         {error ? error : tip }
