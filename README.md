@@ -84,4 +84,8 @@ GET /account/profile
 
 ## Результат
 
+https://ecstatic-mclean-7b0ebc.netlify.com/  
+
+!!!POST 404  
+https://ecstatic-mclean-7b0ebc.netlify.com/api/v8/sessions/guest  
 
